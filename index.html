@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Bay 7 is a one-on-one 3D arena shooter. Arrow keys move and turn. Space shoots." />
+  <meta name="color-scheme" content="dark" />
+  <title>Bay 7 — Arena Duel</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23090b10'/%3E%3Cpath d='M8 7h16L14 26' fill='none' stroke='%235ce1ff' stroke-width='3'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body data-mode="menu">
+  <canvas id="view"></canvas>
+  <div id="vignette"></div>
+  <div id="hurt"></div>
+  <div id="incoming"></div>
+
+  <div id="crosshair" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div id="ready" aria-hidden="true"><span id="ready-fill"></span></div>
+  <div id="callout"></div>
+
+  <div id="hud">
+    <div class="top">
+      <div class="brand">Bay 7</div>
+      <div class="rival-readout">
+        <span class="name">Kite</span>
+        <div class="bar rival"><div id="rival-fill"></div></div>
+      </div>
+      <div class="score">
+        <span>You <strong id="you-score">0</strong></span>
+        <span>Kite <strong id="kite-score">0</strong></span>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="integrity">
+        <span>Integrity</span>
+        <div class="bar you"><div id="hp-fill"></div></div>
+      </div>
+      <p id="hint">↑ ↓ move &nbsp;&nbsp; ← → turn &nbsp;&nbsp; space shoot &nbsp;&nbsp; click to look</p>
+      <canvas id="minimap" width="160" height="160"></canvas>
+    </div>
+  </div>
+
+  <div id="overlay">
+    <div class="sheet">
+      <p class="kicker" id="kicker">Arena duel</p>
+      <h1 id="title">Bay 7</h1>
+      <p class="lede" id="lede">A closed pit and one rival. Last one standing keeps it.</p>
+      <p class="tally" id="tally" hidden></p>
+      <ul class="legend" id="legend">
+        <li><kbd>↑</kbd> forward</li>
+        <li><kbd>↓</kbd> back</li>
+        <li><kbd>←</kbd><kbd>→</kbd> turn</li>
+        <li><kbd class="wide">space</kbd> shoot</li>
+      </ul>
+      <p class="note" id="note">Click the pit to look with the mouse. When Kite charges, a red beam marks the shot — turn and walk off it.</p>
+      <div class="actions">
+        <button id="action" type="button">Enter the pit</button>
+        <span class="or">or press Enter</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (location.protocol === "file:") {
+      document.addEventListener("DOMContentLoaded", function () {
+        var lede = document.getElementById("lede");
+        if (lede) {
+          lede.textContent = "Open this folder with a local server, then visit that address. From the project folder: python3 -m http.server";
+        }
+      });
+    }
+  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.js"
+      }
+    }
+  </script>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
